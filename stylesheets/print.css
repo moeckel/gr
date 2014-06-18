@@ -39,7 +39,7 @@ q:before, q:after {
 }
 table {
   border-collapse: collapse;
-  border-spacing: 0;
+  border-spacing: 2;
 }
 body {
   font-size: 13px;
@@ -119,7 +119,7 @@ th {
 
 td {
   border: 1px solid #ebebeb;
-  text-align: center; 
+  text-align: left; 
   font-weight: 300;
 }
 

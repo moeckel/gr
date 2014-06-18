@@ -31,7 +31,7 @@ body {
 	line-height: 1;
 }
 ol, ul {
-	list-style: none;
+	list-style: disc outside none;
 }
 blockquote, q {
 	quotes: none;
@@ -43,7 +43,7 @@ q:before, q:after {
 }
 table {
 	border-collapse: collapse;
-	border-spacing: 0;
+	border-spacing: 2;
 }
 
 /* LAYOUT STYLES */
@@ -223,11 +223,13 @@ table {
 
 th {
   font-weight: 500;
+  padding: 3px;
 }
 
 td {
   border: 1px solid #ebebeb;
-  text-align: center; 
+  text-align: left; 
+  padding: 3px;
   font-weight: 300;
 }
 
@@ -298,10 +300,10 @@ blockquote {
 }
 
 ul li {
-  list-style: disc outside;
+  list-style: disc inside none;
   font-weight: 300;
   font-size: medium;
-  padding-left: 20px;
+  padding-left: 00px;
 }
 
 ol li {
