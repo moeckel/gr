@@ -44,14 +44,81 @@
 
 <p>The deliverable contains a compiled executable called rasterizeI75.exe (for PC only). Three subdirectories are included:</p>
 <li>
-<strong>code:</strong> In this directory, you find the Fortran source code. It has been compiled with ﻿Intel(R) Visual Fortran Composer XE 2013 SP1 to create the executable (rasterizeI75.exe). This code is not neede to run the model, but has been provided to enable programmers to understand every step of the model. </li>
+<strong>/code/</strong> In this directory, you find the Fortran source code. It has been compiled with ﻿Intel(R) Visual Fortran Composer XE 2013 SP1 to create the executable (rasterizeI75.exe). This code is not neede to run the model, but has been provided to enable programmers to understand every step of the model. </li>
 <li>
-<strong>data:</strong> This directory has all input data that is read by the program (rasterizeI75.exe). The program also writes additional files to this directory while running. </li>
+<strong>/data/</strong> This directory has all input data that is read by the program (rasterizeI75.exe). The program also writes additional files to this directory while running. </li>
 <li>
-<strong>shp:</strong> This directory provides a shapefile of zones in the Geogia study area. </li>
+<strong>/shp/</strong> This directory provides a shapefile of zones in the Geogia study area. </li>
 <p><br>After downloading the executable and the the two directories /data and /shp (downloading the directory /code is optional), open a command prompt window, navigate to the directory where you saved these files and open rasterizeI75.exe. The model will run through a series of steps to create a raster zone system and to disaggregate auto and truck flows of the Georgia Statewide Transportation Model from zones to raster cells. 
 </p>
 
+<h3>Modeling steps
+</h3>
+<p>The model processes the steps listed below. Note that the model takes a long time to run initially to create intermediate output files. Several of those files are greater than 100 MB, and therefore, could not be uploaded to github. After the model completed these steps once, selected if statements in the code can be set from .true. to .false. This allows skipping complex data processing and reading intermediate files instead, reducing the runtime substantially in subsequent model runs. </p>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th align="left" scope="col">Step</th>
+    <th align="left" scope="col">Description</th>
+    <th colspan="2" align="left" scope="col">Possible to skip*</th>
+  </tr>
+  <tr>
+    <th align="left" scope="row">A</th>
+    <td align="left">Create gradual raster cells</td>
+    <td align="left">Yes</td>
+    <td align="left">rasterizeI75.for:&nbsp;Line&nbsp;25</td>
+  </tr>
+  <tr>
+    <th align="left" scope="row">A.1</th>
+    <td align="left">Create finest raster cell system (250 x 250 meters)</td>
+    <td align="left">Yes</td>
+    <td align="left">rasterizeI75.for:&nbsp;Line&nbsp;207</td>
+  </tr>
+  <tr>
+    <th align="left" scope="row">A.2</th>
+    <td align="left">Allocate socio-economic data proportionally to raster cells</td>
+    <td align="left">No</td>
+    <td align="left">rasterizeI75.for:&nbsp;Line&nbsp;285</td>
+  </tr>
+  <tr>
+    <th align="left" scope="row">A.3</th>
+    <td align="left">Start with single raster cell that covers the entire study area and successively split into four smaller zones until an exogenously given threshold value is reached for every raster cell</td>
+    <td align="left">No</td>
+    <td align="left">rasterizeI75.for:&nbsp;Line&nbsp;392</td>
+  </tr>
+  <tr>
+    <th align="left" scope="row">A.4</th>
+    <td align="left">Write ungenerate file that can be converted by Arc/GIS into a shapefile</td>
+    <td align="left">No</td>
+    <td align="left">rasterizeI75.for:&nbsp;Line&nbsp;544</td>
+  </tr>
+  <tr>
+    <th align="left" scope="row">B</th>
+    <td align="left">Disaggregate trips from zones to raster cells</td>
+    <td align="left">Yes</td>
+    <td align="left">rasterizeI75.for:&nbsp;Line&nbsp;59</td>
+  </tr>
+  <tr>
+    <th align="left" scope="row">B.1</th>
+    <td align="left">Read gradual raster cells</td>
+    <td align="left">No</td>
+    <td align="left">rasterizeI75.for:&nbsp;Line&nbsp;529</td>
+  </tr>
+  <tr>
+    <th align="left" scope="row">B.2</th>
+    <td align="left">Read zonal trip tables of Georgia statewide model</td>
+    <td align="left">No</td>
+    <td align="left">rasterizeI75data.for:&nbsp;Line&nbsp;130</td>
+  </tr>
+  <tr>
+    <th align="left" scope="row">B.3</th>
+    <td align="left">Disaggregate zonal trip tables to raster-cell trip tables</td>
+    <td align="left">No</td>
+    <td align="left">rasterizeI75.for: Line 581</td>
+  </tr>
+  </table>
+<p><div class="inner">
+  <h6>*Step may only be skipped after the model has run once and written out intermediate files.</h6>
+</div></p>
 <h3>
 <a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 

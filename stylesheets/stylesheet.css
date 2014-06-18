@@ -270,13 +270,16 @@ h5 {
 } 
 
 h6 {
-  font-size: .8em;
-  color: #303030;
+	font-size: .8em;
+	color: #303030;
+	text-align: right;
 } 
 
 p {
-  font-weight: 300;
-  margin-bottom: 20px;
+	font-weight: 300;
+	margin-bottom: 20px;
+	font-size: medium;
+	text-align: justify;
 }
  
 a {
@@ -295,7 +298,9 @@ blockquote {
 }
 
 ul li {
-  list-style: disc inside;
+  list-style: disc outside;
+  font-weight: 300;
+  font-size: medium;
   padding-left: 20px;
 }
 

@@ -102,6 +102,7 @@ pre code {
 
 ul, ol, dl {
   margin-bottom: 20px;
+  font-size: 13px;
 }
 
 
@@ -186,7 +187,8 @@ blockquote {
 }
 
 ul li {
-  list-style: disc inside;
+  font-weight: 300;
+  list-style: disc outside;
   padding-left: 20px;
 }
 
